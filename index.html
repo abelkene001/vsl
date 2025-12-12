@@ -141,7 +141,8 @@
         resize: vertical;
       }
 
-      .submit-btn {
+      .submit-btn,
+      .call-btn {
         width: 100%;
         padding: 16px;
         background: #fff;
@@ -152,14 +153,18 @@
         font-weight: 700;
         cursor: pointer;
         transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
       }
 
-      .submit-btn:hover {
+      .submit-btn:hover,
+      .call-btn:hover {
         background: #e0e0e0;
         transform: translateY(-2px);
       }
 
-      .submit-btn:active {
+      .submit-btn:active,
+      .call-btn:active {
         transform: translateY(0);
       }
 
@@ -168,6 +173,20 @@
         color: #666;
         cursor: not-allowed;
         transform: none;
+      }
+
+      .call-btn {
+        background: #22c55e;
+        color: #fff;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .call-btn:hover {
+        background: #16a34a;
       }
 
       .countdown-container {
@@ -326,7 +345,7 @@
       <div class="video-container">
         <iframe
           id="vsl-video"
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1"
+          src="https://www.youtube.com/watch?v=UDBkiBnMrHs"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         >
@@ -342,16 +361,14 @@
           your business
         </p>
 
-        <form id="booking-form" netlify netlify-honeypot="bot-field" hidden>
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="tel" name="phone" />
-          <input type="text" name="date" />
-          <input type="text" name="time" />
-          <textarea name="note"></textarea>
-        </form>
+        <form
+          id="booking-form"
+          name="strategy-bookings"
+          method="POST"
+          data-netlify="true"
+        >
+          <input type="hidden" name="form-name" value="strategy-bookings" />
 
-        <form id="visible-form">
           <div class="form-group">
             <label for="name">Full Name *</label>
             <input
@@ -445,6 +462,22 @@
           <div class="meeting-details" id="meeting-details">
             <!-- Meeting details will be inserted here -->
           </div>
+
+          <a href="tel:+2348109729255" class="call-btn">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
+            </svg>
+            Call Now
+          </a>
         </div>
       </div>
 
@@ -460,8 +493,7 @@
     </div>
 
     <script>
-      const visibleForm = document.getElementById("visible-form");
-      const hiddenForm = document.getElementById("booking-form");
+      const form = document.getElementById("booking-form");
       const countdownContainer = document.getElementById("countdown-container");
       const dateInput = document.getElementById("date");
       const submitBtn = document.querySelector(".submit-btn");
@@ -498,7 +530,7 @@
 
           // If meeting hasn't passed yet, show countdown
           if (meetingDateTime > new Date()) {
-            visibleForm.style.display = "none";
+            form.style.display = "none";
             countdownContainer.classList.add("show");
             displayMeetingDetails(bookingData);
             startCountdown(meetingDateTime);
@@ -580,8 +612,18 @@
         setInterval(updateCountdown, 1000);
       }
 
+      // Encode form data
+      function encode(data) {
+        return Object.keys(data)
+          .map(
+            (key) =>
+              encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+          )
+          .join("&");
+      }
+
       // Form submission
-      visibleForm.addEventListener("submit", async (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         // Check if user already has a booking
@@ -597,44 +639,36 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Submitting...";
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
-        const note = document.getElementById("note").value;
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+
+        const date = data.date;
+        const time = data.time;
 
         // Create meeting datetime
         const meetingDateTime = new Date(`${date}T${convertTo24Hour(time)}`);
 
         // Store booking data locally
         const bookingData = {
-          name,
-          email,
-          phone,
-          date,
-          time,
-          note,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          date: date,
+          time: time,
+          note: data.note,
           meetingDateTime: meetingDateTime.toISOString(),
           bookedAt: new Date().toISOString(),
         };
 
         try {
-          // Populate hidden form
-          const hiddenInputs = hiddenForm.querySelectorAll("input, textarea");
-          hiddenInputs[0].value = name;
-          hiddenInputs[1].value = email;
-          hiddenInputs[2].value = phone;
-          hiddenInputs[3].value = date;
-          hiddenInputs[4].value = time;
-          hiddenInputs[5].value = note;
-
-          // Submit hidden form to Netlify
-          const formData = new FormData(hiddenForm);
-
           const response = await fetch("/", {
             method: "POST",
-            body: formData,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({
+              "form-name": "strategy-bookings",
+              ...data,
+            }),
           });
 
           if (response.ok) {
@@ -644,21 +678,22 @@
             // Show success notification
             showNotification(
               "Meeting Confirmed!",
-              "Your strategy session has been booked. Check your email for details.",
+              "Your strategy session has been booked successfully.",
               "success"
             );
 
-            // Hide form and show countdown after 2 seconds
+            // Hide form and show countdown after 1 second
             setTimeout(() => {
-              visibleForm.style.display = "none";
+              form.style.display = "none";
               countdownContainer.classList.add("show");
               displayMeetingDetails(bookingData);
               startCountdown(meetingDateTime);
-            }, 2000);
+            }, 1000);
           } else {
             throw new Error("Submission failed");
           }
         } catch (error) {
+          console.error("Error:", error);
           showNotification(
             "Submission Failed",
             "Something went wrong. Please try again or contact support.",
