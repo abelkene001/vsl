@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Losing Money on Ads - Book Your Strategy Session</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .subheadline {
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 30px 0;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .cta-section {
+            background: #111;
+            padding: 40px 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cta-subtext {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #fff;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #000;
+            color: #fff;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .countdown-container {
+            display: none;
+            background: #1a472a;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .countdown-container.show {
+            display: block;
+        }
+
+        .countdown-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-size: 36px;
+            font-weight: 700;
+            display: block;
+            color: #fff;
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: #ccc;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .meeting-details {
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .meeting-details p {
+            margin: 8px 0;
+            color: #ccc;
+        }
+
+        .meeting-details strong {
+            color: #fff;
+        }
+
+        .success-message {
+            display: none;
+            background: #1a472a;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .error-message {
+            display: none;
+            background: #4a1a1a;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .subheadline {
+                font-size: 16px;
+            }
+
+            .cta-headline {
+                font-size: 20px;
+            }
+
+            .cta-section {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .countdown-value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>You're Losing Hundreds of Thousands on Ads — And You Don't Even Know It</h1>
+            <p class="subheadline">Watch this short video to discover why your ads aren't converting into sales</p>
+        </header>
+
+        <div class="video-container">
+            <iframe 
+                id="vsl-video"
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID?rel=0&modestbranding=1" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-headline">Ready to Turn Your Ads Into Predictable Revenue?</h2>
+            <p class="cta-subtext">Book a 1-on-1 strategy session and get a custom ad system designed for your business</p>
+
+            <form id="booking-form" name="strategy-bookings" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="strategy-bookings">
+                <p style="display: none;">
+                    <label>Don't fill this out: <input name="bot-field" /></label>
+                </p>
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+234 xxx xxx xxxx">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Preferred Meeting Date *</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Preferred Meeting Time *</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select a time slot</option>
+                        <option value="09:00 AM">9:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="01:00 PM">1:00 PM</option>
+                        <option value="02:00 PM">2:00 PM</option>
+                        <option value="03:00 PM">3:00 PM</option>
+                        <option value="04:00 PM">4:00 PM</option>
+                        <option value="05:00 PM">5:00 PM</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Tell me about your business (Optional)</label>
+                    <textarea id="note" name="note" placeholder="What do you sell? What's your biggest challenge with ads?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Book My Strategy Session</button>
+
+                <div class="error-message" id="error-message">
+                    You've already booked a meeting. Please wait for your scheduled session.
+                </div>
+            </form>
+
+            <div class="countdown-container" id="countdown-container">
+                <div class="countdown-title">✓ Your Meeting is Confirmed!</div>
+                
+                <div class="countdown-timer" id="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+
+                <div class="meeting-details" id="meeting-details">
+                    <!-- Meeting details will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Wisdom Ad Systems. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('booking-form');
+        const countdownContainer = document.getElementById('countdown-container');
+        const errorMessage = document.getElementById('error-message');
+        const dateInput = document.getElementById('date');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Check if user already has a booking
+        function checkExistingBooking() {
+            const booking = localStorage.getItem('userBooking');
+            if (booking) {
+                const bookingData = JSON.parse(booking);
+                const meetingDateTime = new Date(bookingData.meetingDateTime);
+                
+                // If meeting hasn't passed yet, show countdown
+                if (meetingDateTime > new Date()) {
+                    form.style.display = 'none';
+                    countdownContainer.classList.add('show');
+                    displayMeetingDetails(bookingData);
+                    startCountdown(meetingDateTime);
+                    return true;
+                } else {
+                    // Meeting has passed, clear the booking
+                    localStorage.removeItem('userBooking');
+                }
+            }
+            return false;
+        }
+
+        // Display meeting details
+        function displayMeetingDetails(booking) {
+            const detailsContainer = document.getElementById('meeting-details');
+            const meetingDate = new Date(booking.meetingDateTime);
+            
+            detailsContainer.innerHTML = `
+                <p><strong>Name:</strong> ${booking.name}</p>
+                <p><strong>Email:</strong> ${booking.email}</p>
+                <p><strong>Phone:</strong> ${booking.phone}</p>
+                <p><strong>Meeting Date:</strong> ${meetingDate.toLocaleDateString('en-GB', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })}</p>
+                <p><strong>Meeting Time:</strong> ${booking.time}</p>
+                ${booking.note ? `<p><strong>Notes:</strong> ${booking.note}</p>` : ''}
+            `;
+        }
+
+        // Countdown timer
+        function startCountdown(targetDate) {
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    // Meeting time has passed
+                    localStorage.removeItem('userBooking');
+                    location.reload();
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check if user already has a booking
+            if (checkExistingBooking()) {
+                errorMessage.classList.add('show');
+                setTimeout(() => errorMessage.classList.remove('show'), 5000);
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = new FormData(form);
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+
+            // Create meeting datetime
+            const meetingDateTime = new Date(`${date}T${convertTo24Hour(time)}`);
+
+            // Store booking data locally
+            const bookingData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                date: date,
+                time: time,
+                note: formData.get('note'),
+                meetingDateTime: meetingDateTime.toISOString(),
+                bookedAt: new Date().toISOString()
+            };
+
+            try {
+                // Submit to Netlify Forms
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                if (response.ok) {
+                    // Save booking to localStorage
+                    localStorage.setItem('userBooking', JSON.stringify(bookingData));
+                    
+                    // Hide form and show countdown
+                    form.style.display = 'none';
+                    countdownContainer.classList.add('show');
+                    displayMeetingDetails(bookingData);
+                    startCountdown(meetingDateTime);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert('Something went wrong. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book My Strategy Session';
+            }
+        });
+
+        // Convert 12-hour time to 24-hour format
+        function convertTo24Hour(time12h) {
+            const [time, modifier] = time12h.split(' ');
+            let [hours, minutes] = time.split(':');
+            
+            if (hours === '12') {
+                hours = '00';
+            }
+            
+            if (modifier === 'PM') {
+                hours = parseInt(hours, 10) + 12;
+            }
+            
+            return `${hours}:${minutes || '00'}:00`;
+        }
+
+        // Check for existing booking on page load
+        checkExistingBooking();
+    </script>
+</body>
+</html>
