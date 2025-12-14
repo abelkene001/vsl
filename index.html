@@ -503,7 +503,7 @@
                 font-size: 15px;
               "
             >
-              ⚠️ Important Note
+              ⚠️ Inportant Notice
             </p>
             <p style="color: #ccc; font-size: 14px; line-height: 1.6">
               Building a working ad and sales system requires real work. Most
@@ -791,6 +791,7 @@
         };
 
         try {
+          // Submit to Netlify Forms
           const response = await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -801,6 +802,9 @@
           });
 
           if (response.ok) {
+            // Send Telegram notification
+            await sendTelegramNotification(bookingData);
+
             // Save booking to localStorage
             localStorage.setItem("userBooking", JSON.stringify(bookingData));
 
@@ -832,6 +836,56 @@
           submitBtn.textContent = "Book My Strategy Session";
         }
       });
+
+      // Send Telegram notification
+      async function sendTelegramNotification(booking) {
+        const TELEGRAM_BOT_TOKEN =
+          "8024397650:AAGS2OEUZOqY5kPy4Mxe91Nm6xW1deRq7fw";
+        const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID"; // You need to get this
+
+        const message = `
+🔔 *NEW BOOKING ALERT!*
+
+👤 *Name:* ${booking.name}
+📧 *Email:* ${booking.email}
+📱 *Phone:* ${booking.phone}
+
+💼 *Business:* ${booking.business}
+💰 *Monthly Revenue:* ${booking.monthlyRevenue}
+💵 *Avg Product Price:* ${booking.avgPrice}
+📊 *Ad Spend:* ${booking.adSpend}
+
+❌ *Problem:* ${booking.problem}
+📈 *Scale Capacity:* ${booking.capacity}
+
+📅 *Meeting Date:* ${booking.date}
+⏰ *Meeting Time:* ${booking.time}
+
+🕒 *Booked At:* ${new Date(booking.bookedAt).toLocaleString("en-GB", {
+          timeZone: "Africa/Lagos",
+        })}
+            `.trim();
+
+        try {
+          await fetch(
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chat_id: 6287355112,
+                text: message,
+                parse_mode: "Markdown",
+              }),
+            }
+          );
+        } catch (error) {
+          console.error("Telegram notification failed:", error);
+          // Don't show error to user - booking is still successful
+        }
+      }
 
       // Convert 12-hour time to 24-hour format
       function convertTo24Hour(time12h) {
