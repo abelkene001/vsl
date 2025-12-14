@@ -137,7 +137,7 @@
       }
 
       textarea {
-        min-height: 100px;
+        min-height: 80px;
         resize: vertical;
       }
 
@@ -358,8 +358,8 @@
           Ready to Turn Your Ads Into Predictable Revenue?
         </h2>
         <p class="cta-subtext">
-          Book a 1-on-1 strategy session and get a custom ad system designed for
-          your business
+          This call is to identify what's breaking your ads and sales — and how
+          to fix it.
         </p>
 
         <form
@@ -404,6 +404,137 @@
           </div>
 
           <div class="form-group">
+            <label for="business">What are you currently selling? *</label>
+            <textarea
+              id="business"
+              name="business"
+              required
+              placeholder="Describe your product or service"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ad-spend"
+              >How much have you spent on ads in the last 3 months? *</label
+            >
+            <select id="ad-spend" name="ad-spend" required>
+              <option value="">Select range</option>
+              <option value="₦0 - Never run ads">₦0 - Never run ads</option>
+              <option value="₦10k - ₦50k">₦10k - ₦50k</option>
+              <option value="₦50k - ₦100k">₦50k - ₦100k</option>
+              <option value="₦100k - ₦300k">₦100k - ₦300k</option>
+              <option value="₦300k - ₦500k">₦300k - ₦500k</option>
+              <option value="₦500k+">₦500k+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="avg-price"
+              >What is your average product/service price? *</label
+            >
+            <input
+              type="text"
+              id="avg-price"
+              name="avg-price"
+              required
+              placeholder="e.g., ₦50,000"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="problem"
+              >Why do you think your ads are not working? *</label
+            >
+            <textarea
+              id="problem"
+              name="problem"
+              required
+              placeholder="Be specific - what's the main challenge you're facing?"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="capacity"
+              >If your ads or sales 10x tomorrow, can you handle the demand?
+              *</label
+            >
+            <select id="capacity" name="capacity" required>
+              <option value="">Select answer</option>
+              <option value="Yes, fully ready">Yes, fully ready</option>
+              <option value="Yes, but need to scale operations">
+                Yes, but need to scale operations
+              </option>
+              <option value="Not sure, need guidance">
+                Not sure, need guidance
+              </option>
+              <option value="No, not yet">No, not yet</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="monthly-revenue"
+              >What is your current monthly revenue? *</label
+            >
+            <select id="monthly-revenue" name="monthly-revenue" required>
+              <option value="">Select range</option>
+              <option value="₦0 - ₦100k">₦0 - ₦100k</option>
+              <option value="₦100k - ₦500k">₦100k - ₦500k</option>
+              <option value="₦500k - ₦1M">₦500k - ₦1M</option>
+              <option value="₦1M - ₦3M">₦1M - ₦3M</option>
+              <option value="₦3M - ₦5M">₦3M - ₦5M</option>
+              <option value="₦5M+">₦5M+</option>
+            </select>
+          </div>
+
+          <div
+            class="form-group"
+            style="
+              background: #1a1a1a;
+              padding: 20px;
+              border-radius: 8px;
+              border: 1px solid #333;
+            "
+          >
+            <p
+              style="
+                color: #ff6b6b;
+                font-weight: 600;
+                margin-bottom: 10px;
+                font-size: 15px;
+              "
+            >
+              ⚠️ Investment Required
+            </p>
+            <p style="color: #ccc; font-size: 14px; line-height: 1.6">
+              Building a proper ad and conversion system requires an investment
+              of
+              <strong style="color: #fff">₦100,000 to ₦1,000,000</strong>
+              depending on your business size and goals. If this investment
+              range is not realistic for you right now, please do not book this
+              call.
+            </p>
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                margin-top: 15px;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="checkbox"
+                id="investment-check"
+                name="investment-check"
+                required
+                style="width: auto; margin-right: 10px; cursor: pointer"
+              />
+              <span style="color: #fff; font-size: 14px"
+                >I understand and can invest within this range *</span
+              >
+            </label>
+          </div>
+
+          <div class="form-group">
             <label for="date">Preferred Meeting Date *</label>
             <input type="date" id="date" name="date" required />
           </div>
@@ -422,15 +553,6 @@
               <option value="04:00 PM">4:00 PM</option>
               <option value="05:00 PM">5:00 PM</option>
             </select>
-          </div>
-
-          <div class="form-group">
-            <label for="note">Tell me about your business (Optional)</label>
-            <textarea
-              id="note"
-              name="note"
-              placeholder="What do you sell? What's your biggest challenge with ads?"
-            ></textarea>
           </div>
 
           <button type="submit" class="submit-btn">
@@ -553,6 +675,12 @@
                 <p><strong>Name:</strong> ${booking.name}</p>
                 <p><strong>Email:</strong> ${booking.email}</p>
                 <p><strong>Phone:</strong> ${booking.phone}</p>
+                <p><strong>Business:</strong> ${booking.business}</p>
+                <p><strong>Ad Spend:</strong> ${booking.adSpend}</p>
+                <p><strong>Average Price:</strong> ${booking.avgPrice}</p>
+                <p><strong>Monthly Revenue:</strong> ${
+                  booking.monthlyRevenue
+                }</p>
                 <p><strong>Meeting Date:</strong> ${meetingDate.toLocaleDateString(
                   "en-GB",
                   {
@@ -563,11 +691,6 @@
                   }
                 )}</p>
                 <p><strong>Meeting Time:</strong> ${booking.time}</p>
-                ${
-                  booking.note
-                    ? `<p><strong>Notes:</strong> ${booking.note}</p>`
-                    : ""
-                }
             `;
       }
 
@@ -655,9 +778,14 @@
           name: data.name,
           email: data.email,
           phone: data.phone,
+          business: data.business,
+          adSpend: data["ad-spend"],
+          avgPrice: data["avg-price"],
+          problem: data.problem,
+          capacity: data.capacity,
+          monthlyRevenue: data["monthly-revenue"],
           date: date,
           time: time,
-          note: data.note,
           meetingDateTime: meetingDateTime.toISOString(),
           bookedAt: new Date().toISOString(),
         };
