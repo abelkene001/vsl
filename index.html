@@ -4,42 +4,101 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transform Your Ads Into Revenue Systems</title>
+
     <style>
+      :root {
+        --bg: #000000;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel-2: rgba(255, 255, 255, 0.08);
+        --stroke: rgba(255, 255, 255, 0.12);
+        --stroke-2: rgba(255, 255, 255, 0.18);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.64);
+        --muted-2: rgba(255, 255, 255, 0.48);
+        --yellow: #e2b619;
+        --yellow-2: #f5c731;
+        --shadow: 0 28px 80px rgba(0, 0, 0, 0.72);
+        --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+        --radius-xl: 28px;
+        --radius-lg: 18px;
+        --radius-md: 14px;
+        --radius-sm: 12px;
+      }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
           "SF Pro Text", "Helvetica Neue", sans-serif;
-        background-color: #000000;
-        color: #ffffff;
+        background: var(--bg);
+        color: var(--text);
         line-height: 1.6;
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
 
+      /* Subtle premium background (Apple-ish) */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background: radial-gradient(
+            900px 500px at 50% 0%,
+            rgba(226, 182, 25, 0.14),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px 420px at 15% 20%,
+            rgba(255, 255, 255, 0.06),
+            transparent 55%
+          ),
+          radial-gradient(
+            700px 420px at 85% 25%,
+            rgba(255, 255, 255, 0.04),
+            transparent 55%
+          );
+      }
+
+      /* Fine grain */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+        opacity: 0.22;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+
       .container {
-        max-width: 980px;
+        max-width: 1040px;
         margin: 0 auto;
         padding: 0 22px;
       }
 
-      /* Hero Section */
+      /* Hero */
       header {
         text-align: center;
-        padding: 80px 0 40px;
+        padding: 86px 0 46px;
         opacity: 0;
-        animation: fadeInUp 1s ease forwards;
+        animation: fadeInUp 0.9s ease forwards;
       }
 
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(22px);
         }
         to {
           opacity: 1;
@@ -48,58 +107,76 @@
       }
 
       h1 {
-        font-size: clamp(32px, 5vw, 56px);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        margin-bottom: 20px;
-        background: linear-gradient(135deg, #ffffff 0%, #e2b619 100%);
+        font-size: clamp(34px, 5vw, 58px);
+        font-weight: 650;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        margin-bottom: 18px;
+        background: linear-gradient(135deg, #ffffff 0%, var(--yellow) 110%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
 
       .headline-accent {
-        color: #e2b619;
+        color: var(--yellow);
       }
 
       .subheadline {
-        font-size: clamp(17px, 2.5vw, 21px);
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 15px;
-        font-weight: 400;
+        font-size: clamp(16px, 2.2vw, 20px);
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-weight: 450;
         letter-spacing: -0.01em;
-        max-width: 700px;
+        max-width: 740px;
         margin-left: auto;
         margin-right: auto;
       }
 
-      /* Video Container */
+      /* Video */
       .video-section {
-        padding: 60px 0;
+        padding: 54px 0;
         opacity: 0;
-        animation: fadeInUp 1s ease 0.2s forwards;
+        animation: fadeInUp 0.9s ease 0.12s forwards;
       }
 
       .video-container {
         position: relative;
         width: 100%;
-        max-width: 900px;
+        max-width: 940px;
         margin: 0 auto;
-        padding-bottom: 50.625%;
-        background: #000;
-        border-radius: 18px;
+        padding-bottom: 52.625%;
+        border-radius: var(--radius-xl);
         overflow: hidden;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(255, 255, 255, 0.05);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-          box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        box-shadow: var(--shadow);
+        transform: translateZ(0);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .video-container::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: var(--radius-xl);
+        pointer-events: none;
+        background: linear-gradient(
+          135deg,
+          rgba(226, 182, 25, 0.18),
+          rgba(255, 255, 255, 0.06),
+          rgba(226, 182, 25, 0.08)
+        );
+        opacity: 0.28;
+        filter: blur(16px);
       }
 
       .video-container:hover {
         transform: scale(1.01);
-        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6),
-          0 0 0 1px rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 34px 95px rgba(0, 0, 0, 0.78);
       }
 
       .video-container iframe {
@@ -111,99 +188,101 @@
         border: none;
       }
 
-      /* CTA Section */
+      /* CTA Panel */
       .cta-section {
+        margin: 62px auto;
+        max-width: 980px;
+        border-radius: var(--radius-xl);
+        padding: 78px 42px;
         background: linear-gradient(
           180deg,
-          rgba(18, 18, 18, 0) 0%,
-          rgba(18, 18, 18, 0.6) 100%
+          rgba(255, 255, 255, 0.07) 0%,
+          rgba(255, 255, 255, 0.05) 45%,
+          rgba(255, 255, 255, 0.04) 100%
         );
-        backdrop-filter: blur(60px);
-        -webkit-backdrop-filter: blur(60px);
-        padding: 80px 40px;
-        border-radius: 24px;
-        margin: 60px auto;
-        max-width: 980px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(26px);
+        -webkit-backdrop-filter: blur(26px);
         opacity: 0;
-        animation: fadeInUp 1s ease 0.4s forwards;
+        animation: fadeInUp 0.9s ease 0.24s forwards;
       }
 
       .cta-headline {
         font-size: clamp(28px, 4vw, 40px);
-        font-weight: 600;
+        font-weight: 650;
         margin-bottom: 12px;
         text-align: center;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
         color: #ffffff;
       }
 
       .cta-subtext {
         font-size: clamp(15px, 2vw, 17px);
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 50px;
+        color: var(--muted);
+        margin-bottom: 48px;
         text-align: center;
-        font-weight: 400;
-        max-width: 600px;
+        font-weight: 450;
+        max-width: 620px;
         margin-left: auto;
         margin-right: auto;
       }
 
-      /* Form Styles */
+      /* Form */
       form {
-        max-width: 600px;
+        max-width: 640px;
         margin: 0 auto;
       }
 
       .form-group {
-        margin-bottom: 24px;
+        margin-bottom: 22px;
         opacity: 0;
-        animation: fadeInUp 0.6s ease forwards;
+        animation: fadeInUp 0.55s ease forwards;
       }
 
       .form-group:nth-child(1) {
-        animation-delay: 0.5s;
+        animation-delay: 0.32s;
       }
       .form-group:nth-child(2) {
-        animation-delay: 0.55s;
+        animation-delay: 0.35s;
       }
       .form-group:nth-child(3) {
-        animation-delay: 0.6s;
+        animation-delay: 0.38s;
       }
       .form-group:nth-child(4) {
-        animation-delay: 0.65s;
+        animation-delay: 0.41s;
       }
       .form-group:nth-child(5) {
-        animation-delay: 0.7s;
+        animation-delay: 0.44s;
       }
       .form-group:nth-child(6) {
-        animation-delay: 0.75s;
+        animation-delay: 0.47s;
       }
       .form-group:nth-child(7) {
-        animation-delay: 0.8s;
+        animation-delay: 0.5s;
       }
       .form-group:nth-child(8) {
-        animation-delay: 0.85s;
+        animation-delay: 0.53s;
       }
       .form-group:nth-child(9) {
-        animation-delay: 0.9s;
+        animation-delay: 0.56s;
       }
       .form-group:nth-child(10) {
-        animation-delay: 0.95s;
+        animation-delay: 0.59s;
       }
       .form-group:nth-child(11) {
-        animation-delay: 1s;
+        animation-delay: 0.62s;
       }
       .form-group:nth-child(12) {
-        animation-delay: 1.05s;
+        animation-delay: 0.65s;
       }
 
       label {
         display: block;
         margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.82);
         letter-spacing: -0.01em;
       }
 
@@ -212,28 +291,29 @@
       select {
         width: 100%;
         padding: 16px 18px;
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(0, 0, 0, 0.35);
         border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         color: #ffffff;
         font-size: 16px;
         font-family: inherit;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: border-color 0.25s ease, background 0.25s ease,
+          box-shadow 0.25s ease, transform 0.25s ease;
         -webkit-appearance: none;
       }
 
       input::placeholder,
       textarea::placeholder {
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.32);
       }
 
       input:focus,
       textarea:focus,
       select:focus {
         outline: none;
-        background: rgba(255, 255, 255, 0.06);
-        border-color: #e2b619;
-        box-shadow: 0 0 0 4px rgba(226, 182, 25, 0.1);
+        background: rgba(0, 0, 0, 0.55);
+        border-color: rgba(226, 182, 25, 0.85);
+        box-shadow: 0 0 0 4px rgba(226, 182, 25, 0.12);
       }
 
       select {
@@ -245,80 +325,136 @@
       }
 
       select option {
-        background: #1a1a1a;
+        background: #0f0f0f;
         color: #ffffff;
       }
 
       input[type="date"]::-webkit-calendar-picker-indicator {
         filter: invert(1);
         cursor: pointer;
-        opacity: 0.6;
+        opacity: 0.65;
         transition: opacity 0.2s;
       }
-
       input[type="date"]::-webkit-calendar-picker-indicator:hover {
         opacity: 1;
       }
 
       textarea {
-        min-height: 100px;
+        min-height: 104px;
         resize: vertical;
-        font-family: inherit;
       }
 
-      /* Investment Warning Box */
+      /* Investment Warning Box (more premium) */
       .investment-warning {
+        padding: 22px;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(226, 182, 25, 0.22);
         background: linear-gradient(
           135deg,
-          rgba(226, 182, 25, 0.08) 0%,
-          rgba(226, 182, 25, 0.04) 100%
+          rgba(226, 182, 25, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 45%,
+          rgba(0, 0, 0, 0.25) 100%
         );
-        padding: 24px;
-        border-radius: 16px;
-        border: 1px solid rgba(226, 182, 25, 0.2);
-        margin: 32px 0;
+        box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
+        margin: 28px 0;
       }
 
       .warning-title {
-        color: #e2b619;
-        font-weight: 600;
-        margin-bottom: 12px;
-        font-size: 15px;
+        color: var(--yellow);
+        font-weight: 750;
+        margin-bottom: 10px;
+        font-size: 14px;
         letter-spacing: -0.01em;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
       }
 
       .warning-text {
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.74);
         font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 18px;
+        line-height: 1.65;
+        margin-bottom: 16px;
       }
 
+      .warning-text strong {
+        color: #ffffff;
+        font-weight: 750;
+      }
+
+      /* Checkbox (FIXED: fully clickable row + premium) */
       .checkbox-wrapper {
         display: flex;
         align-items: flex-start;
-        cursor: pointer;
         gap: 12px;
+        padding: 14px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.28);
+        cursor: pointer;
+        user-select: none;
+        transition: border-color 0.25s ease, background 0.25s ease,
+          transform 0.25s ease;
       }
 
-      input[type="checkbox"] {
+      .checkbox-wrapper:hover {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(0, 0, 0, 0.38);
+        transform: translateY(-1px);
+      }
+
+      /* hide default checkbox but keep it accessible + functional */
+      .checkbox-wrapper input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .checkbox-ui {
         width: 20px;
         height: 20px;
-        cursor: pointer;
-        margin: 0;
+        border-radius: 7px;
+        border: 1.6px solid rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.05);
         flex-shrink: 0;
-        border-radius: 6px;
-        accent-color: #e2b619;
+        margin-top: 2px;
+        display: grid;
+        place-items: center;
+        transition: border-color 0.2s ease, background 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .checkbox-ui svg {
+        width: 14px;
+        height: 14px;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+      }
+
+      /* checked state */
+      .checkbox-wrapper input[type="checkbox"]:checked + .checkbox-ui {
+        border-color: rgba(226, 182, 25, 0.9);
+        background: rgba(226, 182, 25, 0.14);
+        box-shadow: 0 0 0 4px rgba(226, 182, 25, 0.12);
+      }
+
+      .checkbox-wrapper input[type="checkbox"]:checked + .checkbox-ui svg {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* focus visible */
+      .checkbox-wrapper input[type="checkbox"]:focus-visible + .checkbox-ui {
+        box-shadow: 0 0 0 4px rgba(226, 182, 25, 0.18);
       }
 
       .checkbox-label {
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(255, 255, 255, 0.92);
         font-size: 14px;
         line-height: 1.5;
-        user-select: none;
       }
 
       /* Buttons */
@@ -326,69 +462,73 @@
       .call-btn {
         width: 100%;
         padding: 18px;
-        background: #e2b619;
-        color: #000000;
         border: none;
-        border-radius: 12px;
+        border-radius: 16px;
         font-size: 17px;
-        font-weight: 600;
+        font-weight: 750;
         cursor: pointer;
         font-family: inherit;
         letter-spacing: -0.01em;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 16px rgba(226, 182, 25, 0.3);
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+          background 0.25s ease, border-color 0.25s ease;
       }
 
-      .submit-btn:hover,
-      .call-btn:hover {
-        background: #f5c731;
+      .submit-btn {
+        background: linear-gradient(180deg, var(--yellow-2), var(--yellow));
+        color: #000000;
+        box-shadow: 0 10px 30px rgba(226, 182, 25, 0.22);
+      }
+
+      .submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(226, 182, 25, 0.4);
+        box-shadow: 0 14px 38px rgba(226, 182, 25, 0.3);
       }
 
-      .submit-btn:active,
-      .call-btn:active {
+      .submit-btn:active {
         transform: translateY(0);
       }
 
       .submit-btn:disabled {
-        background: rgba(226, 182, 25, 0.3);
-        color: rgba(0, 0, 0, 0.4);
+        background: rgba(226, 182, 25, 0.25);
+        color: rgba(0, 0, 0, 0.45);
         cursor: not-allowed;
         transform: none;
         box-shadow: none;
       }
 
       .call-btn {
-        background: rgba(255, 255, 255, 0.1);
+        margin-top: 14px;
+        background: rgba(255, 255, 255, 0.06);
         color: #ffffff;
-        margin-top: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
         text-decoration: none;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: none;
       }
 
       .call-btn:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.09);
+        border-color: rgba(255, 255, 255, 0.18);
       }
 
-      /* Countdown Container */
+      /* Countdown */
       .countdown-container {
         display: none;
+        padding: 54px 40px;
+        border-radius: var(--radius-xl);
+        text-align: center;
+        border: 1px solid rgba(226, 182, 25, 0.22);
         background: linear-gradient(
           135deg,
           rgba(226, 182, 25, 0.1) 0%,
-          rgba(226, 182, 25, 0.05) 100%
+          rgba(255, 255, 255, 0.05) 40%,
+          rgba(0, 0, 0, 0.3) 100%
         );
-        padding: 50px 40px;
-        border-radius: 24px;
-        text-align: center;
-        border: 1px solid rgba(226, 182, 25, 0.2);
+        box-shadow: var(--shadow-soft);
       }
 
       .countdown-container.show {
@@ -398,85 +538,89 @@
 
       .countdown-title {
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 800;
         margin-bottom: 8px;
-        color: #e2b619;
+        color: var(--yellow);
         letter-spacing: -0.02em;
       }
 
       .countdown-subtitle {
         font-size: 15px;
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--muted);
         margin-bottom: 40px;
       }
 
       .countdown-timer {
         display: flex;
         justify-content: center;
-        gap: 24px;
-        margin: 40px 0;
+        gap: 22px;
+        margin: 36px 0;
         flex-wrap: wrap;
       }
 
       .countdown-item {
         text-align: center;
-        min-width: 80px;
+        min-width: 84px;
+        padding: 14px 14px;
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .countdown-value {
-        font-size: 48px;
-        font-weight: 700;
+        font-size: 44px;
+        font-weight: 900;
         display: block;
-        color: #e2b619;
-        letter-spacing: -0.03em;
+        color: var(--yellow);
+        letter-spacing: -0.04em;
         font-variant-numeric: tabular-nums;
       }
 
       .countdown-label {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.5);
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.52);
         text-transform: uppercase;
-        margin-top: 8px;
-        letter-spacing: 0.08em;
-        font-weight: 500;
+        margin-top: 6px;
+        letter-spacing: 0.12em;
+        font-weight: 700;
       }
 
       .meeting-details {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 28px;
-        border-radius: 16px;
-        margin-top: 32px;
+        background: rgba(0, 0, 0, 0.28);
+        padding: 26px;
+        border-radius: var(--radius-lg);
+        margin-top: 28px;
         text-align: left;
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .meeting-details p {
-        margin: 12px 0;
-        color: rgba(255, 255, 255, 0.7);
+        margin: 10px 0;
+        color: rgba(255, 255, 255, 0.72);
         font-size: 15px;
         line-height: 1.6;
       }
 
       .meeting-details strong {
         color: #ffffff;
-        font-weight: 600;
+        font-weight: 800;
       }
 
       /* Notifications */
       .notification {
         position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 20px 28px;
-        border-radius: 16px;
-        font-weight: 500;
-        transform: translateX(400px);
+        top: 18px;
+        right: 18px;
+        padding: 18px 22px;
+        border-radius: 18px;
+        font-weight: 600;
+        transform: translateX(420px);
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1000;
-        max-width: 380px;
-        backdrop-filter: blur(40px);
-        -webkit-backdrop-filter: blur(40px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        max-width: 390px;
+        backdrop-filter: blur(26px);
+        -webkit-backdrop-filter: blur(26px);
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55);
       }
 
       .notification.show {
@@ -484,63 +628,55 @@
       }
 
       .notification.success {
-        background: rgba(226, 182, 25, 0.15);
-        border: 1px solid rgba(226, 182, 25, 0.3);
+        background: rgba(226, 182, 25, 0.14);
+        border: 1px solid rgba(226, 182, 25, 0.28);
       }
 
       .notification.error {
-        background: rgba(255, 59, 48, 0.15);
-        border: 1px solid rgba(255, 59, 48, 0.3);
+        background: rgba(255, 59, 48, 0.14);
+        border: 1px solid rgba(255, 59, 48, 0.28);
       }
 
       .notification-title {
-        font-weight: 600;
+        font-weight: 850;
         margin-bottom: 6px;
-        font-size: 16px;
+        font-size: 15px;
         letter-spacing: -0.01em;
         color: #ffffff;
       }
 
       .notification-message {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.72);
         line-height: 1.5;
       }
 
-      /* Footer */
       footer {
         text-align: center;
-        padding: 60px 0 40px;
-        color: rgba(255, 255, 255, 0.4);
+        padding: 62px 0 44px;
+        color: rgba(255, 255, 255, 0.44);
         font-size: 13px;
         letter-spacing: -0.01em;
+      }
+
+      ::selection {
+        background: rgba(226, 182, 25, 0.28);
+        color: #ffffff;
       }
 
       /* Responsive */
       @media (max-width: 768px) {
         header {
-          padding: 50px 0 30px;
+          padding: 56px 0 34px;
         }
 
         .cta-section {
-          padding: 50px 24px;
-          margin: 40px 16px;
+          padding: 54px 20px;
+          margin: 42px 10px;
         }
 
         .video-section {
           padding: 40px 0;
-        }
-
-        .countdown-value {
-          font-size: 36px;
-        }
-
-        .countdown-timer {
-          gap: 16px;
-        }
-
-        .countdown-item {
-          min-width: 70px;
         }
 
         .notification {
@@ -549,27 +685,21 @@
           max-width: calc(100% - 24px);
         }
 
-        .investment-warning {
-          padding: 20px;
+        .countdown-value {
+          font-size: 36px;
         }
 
-        .meeting-details {
-          padding: 20px;
+        .countdown-timer {
+          gap: 14px;
         }
-      }
 
-      /* Smooth scrolling */
-      html {
-        scroll-behavior: smooth;
-      }
-
-      /* Selection */
-      ::selection {
-        background: rgba(226, 182, 25, 0.3);
-        color: #ffffff;
+        .countdown-item {
+          min-width: 78px;
+        }
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <header>
@@ -691,10 +821,9 @@
           </div>
 
           <div class="form-group">
-            <label for="capacity"
-              >If your ads or sales 10x tomorrow, can you handle the
-              demand?</label
-            >
+            <label for="capacity">
+              If your ads or sales 10x tomorrow, can you handle the demand?
+            </label>
             <select id="capacity" name="capacity" required>
               <option value="">Select answer</option>
               <option value="Yes, fully ready">Yes, fully ready</option>
@@ -740,22 +869,37 @@
                 </svg>
                 Investment Required
               </p>
+
               <p class="warning-text">
                 Building a proper ad and conversion system requires an
-                investment of <strong>₦100,000 to ₦1,000,000</strong> depending
-                on your business size and goals. If this investment range isn't
-                realistic for you right now, please don't book this call.
+                investment of
+                <strong>₦100,000 to ₦1,000,000</strong> depending on your
+                business size and goals. If this range isn’t realistic for you
+                right now, please don’t book this call.
               </p>
-              <label class="checkbox-wrapper">
+
+              <!-- ✅ FIXED: clickable + functional (entire row toggles checkbox) -->
+              <label class="checkbox-wrapper" for="investment-check">
                 <input
                   type="checkbox"
                   id="investment-check"
                   name="investment-check"
                   required
                 />
-                <span class="checkbox-label"
-                  >I understand and can invest within this range</span
-                >
+                <span class="checkbox-ui" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M20 6L9 17l-5-5"
+                      stroke="#E2B619"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <span class="checkbox-label">
+                  I understand and can invest within this range
+                </span>
               </label>
             </div>
           </div>
@@ -839,6 +983,7 @@
       <div class="notification-message" id="notification-message"></div>
     </div>
 
+    <!-- ✅ Your original JS unchanged (functionality preserved) -->
     <script>
       const form = document.getElementById("booking-form");
       const countdownContainer = document.getElementById("countdown-container");
